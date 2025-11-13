@@ -333,80 +333,48 @@ div[data-baseweb="select"] * {
 st.markdown("""
 <style>
 
-/* Desktop Sidebar */
+/* Fix Sidebar Size Always */
 [data-testid="stSidebar"] {
     min-width: 300px !important;
     max-width: 300px !important;
+    width: 300px !important;
 }
 
-/* ========== MOBILE ONLY SIDEBAR FIX ========== */
-@media (max-width: 768px) {
+/* Keep Sidebar Toggle Always Visible */
+[data-testid="stSidebarCollapseButton"] {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #1b2636 !important;
+    border: 1px solid #2c3b4e !important;
+    border-radius: 6px !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: 6px !important;
+    cursor: pointer !important;
 
-    /* Always show hamburger toggle */
-    [data-testid="collapsedControl"] {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+    /* Position: ALWAYS show outside sidebar */
+    position: absolute !important;
+    left: 305px !important;
+    top: 10px !important;
+    z-index: 999 !important;
+}
 
-        position: fixed !important;
-        top: 12px !important;
-        left: 12px !important;
+[data-testid="stSidebarCollapseButton"]:hover {
+    background: #273447 !important;
+    transform: scale(1.05);
+}
 
-        background: #1b2636 !important;
-        border: 1px solid #2c3b4e !important;
-        border-radius: 6px !important;
-
-        width: 34px !important;
-        height: 34px !important;
-
-        justify-content: center !important;
-        align-items: center !important;
-
-        z-index: 10000 !important;
-    }
-
-    /* Hide sidebar initially */
+/* Prevent Sidebar From Auto-Collapsing */
+@media (max-width: 2000px) {
     [data-testid="stSidebar"] {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-
-        width: 260px !important;
-        max-width: 260px !important;
-        height: 100vh !important;
-
-        transform: translateX(-260px) !important; /* hidden */
-        transition: transform 0.35s ease-in-out !important;
-
-        background: linear-gradient(180deg, #131b27 0%, #0b1018 100%) !important;
-        z-index: 9998 !important;
-
-        box-shadow: 2px 0 12px rgba(0,0,0,0.45);
-        pointer-events: auto !important;
-    }
-
-    /* When sidebar opens */
-    [data-testid="stSidebar"][aria-expanded="true"] {
         transform: translateX(0) !important;
-    }
-
-    /* Dim screen when sidebar opens */
-    [data-testid="stAppViewContainer"][aria-expanded="true"]::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-        z-index: 9990;
-    }
-
-    /* Prevent clicking background while sidebar is open */
-    [data-testid="stAppViewContainer"][aria-expanded="true"] {
-        pointer-events: none;
     }
 }
 
 </style>
-
 """, unsafe_allow_html=True)
 
 
