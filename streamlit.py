@@ -44,7 +44,6 @@ def show_loader(message="Processing..."):
 
 st.set_page_config(page_title="KrishiMitra", page_icon="🌾", layout="wide")
 
-
 st.sidebar.image("KrishiMitra_logo.png", width=130)
 
 
@@ -352,15 +351,7 @@ if section == "💬 Ask KrishiMitra":
     if st.button("Get Answer"):
         if query.strip():
             loader = show_loader("KrishiMitra soch raha hai...")
-            res = requests.post(
-            API_BASE,
-            json={"query": query},
-            headers={
-        "x-api-key": KRISHIMITRA_API_KEY,
-        "Content-Type": "application/json"
-    }
-    )
-
+            res = requests.post(API_BASE, json={"query": query}, headers=HEADERS)
             loader.empty()
             if res.status_code == 200:
                     data = res.json()
@@ -386,14 +377,7 @@ elif section == "🌾 Crop Recommendation":
     if st.button("Recommend Crops"):
         payload = {"location": location, "season": season}
         loader = show_loader("Analyzing live weather & soil...")
-        res = requests.post(
-        API_BASE,
-        json=payload,
-        headers={
-            "x-api-key": KRISHIMITRA_API_KEY,
-            "Content-Type": "application/json"
-        }
-    )
+        res = requests.post(API_BASE, json=payload, headers=HEADERS)
         loader.empty()
 
         if res.ok:
@@ -421,15 +405,7 @@ elif section == "🧪 Soil & Fertilizer Advice":
     if st.button("Analyze Soil"):
         payload = {"crop": crop, "location": location}
         loader = show_loader("Fetching soil & weather data...")
-        res = requests.post(
-        API_BASE,
-        json=payload,
-        headers={
-            "x-api-key": KRISHIMITRA_API_KEY,
-            "Content-Type": "application/json"
-        }
-    )
-
+        res = requests.post(API_BASE, json=payload, headers=HEADERS)
         loader.empty()
 
         if res.ok:
@@ -458,14 +434,7 @@ elif section == "💧 Irrigation Guidance":
     if st.button("Get Irrigation Tips"):
         payload = {"city": city, "crop": crop, "soil_type": soil_type}
         loader = show_loader("Predicting irrigation pattern...")
-        res = requests.post(
-        API_BASE,
-        json=payload,
-        headers={
-            "x-api-key": KRISHIMITRA_API_KEY,
-            "Content-Type": "application/json"
-        }
-    )
+        res = requests.post(API_BASE, json=payload, headers=HEADERS)
         loader.empty()
 
         if res.ok:
@@ -499,12 +468,7 @@ elif section == "🍃 Disease Detection":
     <div class='loader-text'>Analyzing leaf image...</div>
 </div>
 """, unsafe_allow_html=True)
-                res = requests.post(
-                API_BASE,
-                files=files,
-                headers={"x-api-key": KRISHIMITRA_API_KEY}
-            ) 
-
+                res = requests.post(API_BASE, files=files, headers=HEADERS)
                 loader_area.empty()
         finally:
             try:
