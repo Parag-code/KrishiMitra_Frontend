@@ -339,55 +339,69 @@ st.markdown("""
     max-width: 300px !important;
 }
 
-/* MOBILE VERSION */
+/* ========== MOBILE ONLY SIDEBAR FIX ========== */
 @media (max-width: 768px) {
 
-    /* Show Sidebar Toggle */
+    /* Always show hamburger toggle */
     [data-testid="collapsedControl"] {
-        display: block !important;
+        display: flex !important;
         visibility: visible !important;
-        z-index: 9999 !important;
+        opacity: 1 !important;
+
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+
+        background: #1b2636 !important;
+        border: 1px solid #2c3b4e !important;
+        border-radius: 6px !important;
+
+        width: 34px !important;
+        height: 34px !important;
+
+        justify-content: center !important;
+        align-items: center !important;
+
+        z-index: 10000 !important;
     }
 
-    /* Sidebar Hidden Initially (Slide-out) */
+    /* Hide sidebar initially */
     [data-testid="stSidebar"] {
         position: fixed !important;
-        left: 0 !important;
         top: 0 !important;
-        height: 100vh !important;
+        left: 0 !important;
+
         width: 260px !important;
         max-width: 260px !important;
-        transform: translateX(-260px) !important;   /* HIDE */
-        transition: transform 0.30s ease-in-out !important;
+        height: 100vh !important;
+
+        transform: translateX(-260px) !important; /* hidden */
+        transition: transform 0.35s ease-in-out !important;
+
+        background: linear-gradient(180deg, #131b27 0%, #0b1018 100%) !important;
         z-index: 9998 !important;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.35);
+
+        box-shadow: 2px 0 12px rgba(0,0,0,0.45);
+        pointer-events: auto !important;
     }
 
-    /* Sidebar Opened */
+    /* When sidebar opens */
     [data-testid="stSidebar"][aria-expanded="true"] {
         transform: translateX(0) !important;
     }
 
-    /* Background dim when opened */
+    /* Dim screen when sidebar opens */
     [data-testid="stAppViewContainer"][aria-expanded="true"]::before {
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         background: rgba(0,0,0,0.55);
         z-index: 9990;
     }
 
-    /* Disable clicking on background */
+    /* Prevent clicking background while sidebar is open */
     [data-testid="stAppViewContainer"][aria-expanded="true"] {
         pointer-events: none;
-    }
-
-    /* Sidebar clickable */
-    [data-testid="stSidebar"] {
-        pointer-events: auto !important;
     }
 }
 
