@@ -1,1 +1,1 @@
-# KrishiMitra_Fronted
+# KrishiMitra_Frontend
