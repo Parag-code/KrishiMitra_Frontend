@@ -42,7 +42,13 @@ def show_loader(message="Processing..."):
     return loader_area
 
 
-st.set_page_config(page_title="KrishiMitra", page_icon="🌾", layout="wide")
+st.set_page_config(
+    page_title="KrishiMitra",
+    page_icon="🌾",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 
 st.sidebar.image("KrishiMitra_logo.png", width=130)
 
@@ -323,6 +329,54 @@ div[data-baseweb="select"] * {
 </style>
 
 """, unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+
+/* Fix Sidebar Size Always */
+[data-testid="stSidebar"] {
+    min-width: 300px !important;
+    max-width: 300px !important;
+    width: 300px !important;
+}
+
+/* Keep Sidebar Toggle Always Visible */
+[data-testid="stSidebarCollapseButton"] {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #1b2636 !important;
+    border: 1px solid #2c3b4e !important;
+    border-radius: 6px !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: 6px !important;
+    cursor: pointer !important;
+
+    /* Position: ALWAYS show outside sidebar */
+    position: absolute !important;
+    left: 305px !important;
+    top: 10px !important;
+    z-index: 999 !important;
+}
+
+[data-testid="stSidebarCollapseButton"]:hover {
+    background: #273447 !important;
+    transform: scale(1.05);
+}
+
+/* Prevent Sidebar From Auto-Collapsing */
+@media (max-width: 2000px) {
+    [data-testid="stSidebar"] {
+        transform: translateX(0) !important;
+    }
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 
 st.markdown("""
 <style>
