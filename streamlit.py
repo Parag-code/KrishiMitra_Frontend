@@ -333,48 +333,66 @@ div[data-baseweb="select"] * {
 st.markdown("""
 <style>
 
-/* Fix Sidebar Size Always */
+/* Desktop Sidebar */
 [data-testid="stSidebar"] {
     min-width: 300px !important;
     max-width: 300px !important;
-    width: 300px !important;
 }
 
-/* Keep Sidebar Toggle Always Visible */
-[data-testid="stSidebarCollapseButton"] {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: #1b2636 !important;
-    border: 1px solid #2c3b4e !important;
-    border-radius: 6px !important;
-    width: 28px !important;
-    height: 28px !important;
-    margin: 6px !important;
-    cursor: pointer !important;
+/* MOBILE VERSION */
+@media (max-width: 768px) {
 
-    /* Position: ALWAYS show outside sidebar */
-    position: absolute !important;
-    left: 305px !important;
-    top: 10px !important;
-    z-index: 999 !important;
-}
+    /* Show Sidebar Toggle */
+    [data-testid="collapsedControl"] {
+        display: block !important;
+        visibility: visible !important;
+        z-index: 9999 !important;
+    }
 
-[data-testid="stSidebarCollapseButton"]:hover {
-    background: #273447 !important;
-    transform: scale(1.05);
-}
-
-/* Prevent Sidebar From Auto-Collapsing */
-@media (max-width: 2000px) {
+    /* Sidebar Hidden Initially (Slide-out) */
     [data-testid="stSidebar"] {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        height: 100vh !important;
+        width: 260px !important;
+        max-width: 260px !important;
+        transform: translateX(-260px) !important;   /* HIDE */
+        transition: transform 0.30s ease-in-out !important;
+        z-index: 9998 !important;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.35);
+    }
+
+    /* Sidebar Opened */
+    [data-testid="stSidebar"][aria-expanded="true"] {
         transform: translateX(0) !important;
+    }
+
+    /* Background dim when opened */
+    [data-testid="stAppViewContainer"][aria-expanded="true"]::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.55);
+        z-index: 9990;
+    }
+
+    /* Disable clicking on background */
+    [data-testid="stAppViewContainer"][aria-expanded="true"] {
+        pointer-events: none;
+    }
+
+    /* Sidebar clickable */
+    [data-testid="stSidebar"] {
+        pointer-events: auto !important;
     }
 }
 
 </style>
+
 """, unsafe_allow_html=True)
 
 
